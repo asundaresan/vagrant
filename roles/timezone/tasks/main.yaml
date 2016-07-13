@@ -1,0 +1,18 @@
+- local_action: stat path=/etc/timezone
+  register: timezone_file
+  become: no
+- name: Copy timezone file
+  copy: src=/etc/timezone dest=/etc/timezone 
+  notify: 
+    - reset timezone
+  when: timezone_file.stat.exists
+- name: Create timezone from variable
+  copy: content={{ time_zone }} dest=/etc/timezone 
+  notify: 
+    - reset timezone
+  when: not timezone_file.stat.exists and time_zone is defined 
+- name: Set timezone to UTC
+  copy: content="UTC" dest=/etc/timezone 
+  notify: 
+    - reset timezone
+  when: not timezone_file.stat.exists and not time_zone is defined 
