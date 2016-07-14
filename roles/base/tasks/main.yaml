@@ -1,0 +1,30 @@
+- name: Copy .bashrc
+  template: 
+    src=templates/bashrc.j2
+    dest=/home/vagrant/.bashrc
+    force=yes
+    owner=vagrant
+    group=vagrant 
+- name: Copy .vimrc
+  template: 
+    src=templates/vimrc.j2
+    dest=/home/vagrant/.vimrc
+    force=yes
+    owner=vagrant
+    group=vagrant 
+- name: Install basic packages
+  apt: name={{ item }} state=present
+  with_items:
+    - build-essential
+    - vim-gtk
+    - git 
+    - subversion 
+    - realpath 
+    - cmake 
+- name: Install python packages
+  apt: name={{ item }} state=present
+  with_items:
+    - python-pip
+    - libyaml-dev
+    - ipython
+

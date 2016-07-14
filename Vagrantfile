@@ -11,16 +11,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     v.cpus = 1
   end
 
-  #config.vm.synced_folder git_root, "/opt/sros"
-  #master_ip_addr = "192.168.1.201"
-  #config.vm.provision :host_shell do |host_shell|
-  #  host_shell.inline = "python scripts/config_ipsec.py -N #{N} -I #{master_ip_addr} -H machine"
-  #  #host_shell.name = "Configure ipsec.yml: N=#{N}"
-  #end
-  #config.vm.provision :host_shell do |host_shell|
-  #  host_shell.inline = "python scripts/make_ipsec_config.py"
-  #  #host_shell.name = "Create IPSec configuruation files and keys"
-  #end
+  if File.directory?(File.expand_path("~/projects")) 
+    config.vm.synced_folder "~/projects", "/home/vagrant/projects"
+  end
+  if File.directory?(File.expand_path("~/github")) 
+    config.vm.synced_folder "~/github", "/home/vagrant/github"
+  end
 
 	host_name = "test"
 	config.vm.define "machine1" do |machine|
@@ -35,9 +31,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 			ansible.limit = "machine1"
 			ansible.playbook = "main.yaml"
 			ansible.extra_vars = { 
-				files_root: vagrant_root,
 				host_name: host_name,
-				time_zone: config.timezone.value
 			}
 		end
 	end
