@@ -1,0 +1,12 @@
+---
+# Set ROS version here
+ros_release: "indigo"
+
+# Set ROS package here ( ros-base, desktop, desktop-full )
+ros_package: "ros-base"
+
+# Set ROS repository
+ros_apt_package_uri: "http://packages.ros.org/ros/ubuntu"
+
+# Set ROS repository apt-key
+ros_apt_keyserver: "hkp://ha.pool.sks-keyservers.net"

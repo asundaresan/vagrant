@@ -1,0 +1,17 @@
+---
+- name: Add ROS repository key
+  apt_key:
+    keyserver: "{{ ros_apt_keyserver }}"
+    id: B01FA116
+    state: present
+
+- name: Add ROS repository
+  apt_repository:
+    repo: "deb {{ ros_apt_package_uri }} {{ ansible_lsb.codename }} main"
+    state: present
+    update_cache: yes
+
+- name: Install desired ROS meta-package
+  apt:
+    pkg: "ros-{{ ros_release }}-{{ ros_package }}"
+    state: present
