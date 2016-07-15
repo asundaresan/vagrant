@@ -1,3 +1,0 @@
-- name: reset timezone
-  command: bash -c "timedatectl set-timezone `cat /etc/timezone`"
-

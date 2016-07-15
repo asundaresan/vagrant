@@ -1,5 +1,5 @@
 ---
-- name: Prepare all hosts
+- name: Install and configure all components
   hosts: all
   become: yes
   become_method: sudo
