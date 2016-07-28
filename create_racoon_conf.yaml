@@ -1,0 +1,7 @@
+---
+- name: create racoon configuration 
+  hosts: all
+  become: yes
+  become_method: sudo
+  roles: 
+  - { role: racoon, create_conf: "True" }
