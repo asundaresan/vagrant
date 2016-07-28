@@ -7,6 +7,7 @@ VAGRANTFILE_API_VERSION = "2"
 vagrant_root = File.dirname(__FILE__)
 config = YAML.load_file("#{vagrant_root}/vagrant_configuration.yaml")
 NUM_MACHINES = config["num_machines"]
+MASTER_IP_ADDR = "192.168.1.200"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "ubuntu/trusty64"
@@ -14,18 +15,23 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     v.memory = 1024
     v.cpus = 1
   end
+  # link to projects folder
   if File.directory?(File.expand_path("~/projects")) 
     config.vm.synced_folder "~/projects", "/home/vagrant/projects"
   end
+  # link to projects folder
   if File.directory?(File.expand_path("~/github")) 
     config.vm.synced_folder "~/github", "/home/vagrant/github"
   end
+  # set remote timezone to match host
   if Vagrant.has_plugin?("vagrant-timezone")
     config.timezone.value = :host
   end 
 
-  # TODO: clear config/ and files/ folders
   # TODO: create security.yaml configuration 
+  config.vm.provision :host_shell do |host_shell|
+    host_shell.inline = "python scripts/config_security.py -N #{NUM_MACHINES} -I #{MASTER_IP_ADDR} -H machine -o config/security.yaml"
+  end 
 
   (1..NUM_MACHINES).each do |machine_id|
     hostname = "machine#{machine_id}"
