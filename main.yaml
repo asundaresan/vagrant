@@ -4,7 +4,8 @@
   become: yes
   become_method: sudo
   roles: 
-  - base
-  - timezone
-  - ntp
-  - ros 
+  - racoon
+#  - base
+#  - timezone
+#  - ntp
+#  - ros 
