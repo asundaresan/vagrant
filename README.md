@@ -23,13 +23,15 @@ The roles are git sub-modules. You can add more sub-modules as follows.
 git submodule add https://github.com/asundaresan/ansible-role-timezone.git roles/timezone
 ```
 
-# Installing dependencies 
+## 
 
-## Ubuntu 
-### vagrant 
- 
-### ansible 
- 
-## Mac OS X 
+## Installing dependencies 
 
-# Install vagrant plugins 
+### Ubuntu 
+#### vagrant 
+ 
+#### ansible 
+# 
+### Mac OS X 
+
+## Install vagrant plugins 
