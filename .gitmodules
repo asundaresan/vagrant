@@ -13,3 +13,6 @@
 [submodule "roles/racoon"]
 	path = roles/racoon
 	url = https://github.com/asundaresan/ansible-role-racoon.git
+[submodule "roles/devel"]
+	path = roles/devel
+	url = https://github.com/asundaresan/ansible-role-devel.git
