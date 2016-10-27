@@ -1,7 +1,0 @@
----
-- name: create key
-  hosts: all
-  become: yes
-  become_method: sudo
-  roles: 
-  - { role: racoon, create_key: "True" }

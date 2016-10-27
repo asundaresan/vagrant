@@ -6,5 +6,5 @@
   roles: 
   - timezone
   - base
-  - timezone
   - ntp
+  - devel
