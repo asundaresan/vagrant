@@ -5,15 +5,20 @@ require 'yaml'
 
 VAGRANTFILE_API_VERSION = "2"
 vagrant_root = File.dirname(__FILE__)
-config = YAML.load_file("#{vagrant_root}/vagrant_configuration.yaml")
-config_memory = config["memory"]
-config_cpus = config["cpus"]
+# read configuration from file
+conf = YAML.load_file("#{vagrant_root}/vagrant_configuration.yaml")
+conf_memory = conf["memory"]
+conf_cpus = conf["cpus"]
+conf_hostname = conf["hostname"]
+conf_name = conf["name"]
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "ubuntu/trusty64"
+  config.vm.hostname = conf_hostname
   config.vm.provider "virtualbox" do |v|
-    v.memory = config_memory
-    v.cpus = config_cpus
+    v.memory = conf_memory
+    v.cpus = conf_cpus
+    v.name = conf_name
   end
   # link to projects folder
   if File.directory?(File.expand_path("~/projects")) 
@@ -29,11 +34,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end 
 
   hostname = "quirm"
-  config.vm.define "machine#{machine_id}" do |machine|
-    # Only execute the ansible provisioner, when all machines are up and ready.
-    config.vm.provision :ansible do |ansible|
-      ansible.limit = "all"
-      ansible.playbook = "main.yaml"
-    end
+  # Only execute the ansible provisioner, when all machines are up and ready.
+  config.vm.provision :ansible do |ansible|
+    ansible.limit = "all"
+    ansible.playbook = "main.yaml"
   end
 end
