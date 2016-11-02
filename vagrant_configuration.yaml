@@ -1,4 +1,6 @@
-box: "ubuntu/xenial64"
+box: "ubuntu/trusty64"
 num_machines: 1
 memory: 4096
 cpus: 2
+hostname: quirm
+name: ubuntu_14_04
