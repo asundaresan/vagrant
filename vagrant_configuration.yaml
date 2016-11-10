@@ -1,4 +1,4 @@
+box: "ubuntu/xenial64"
 num_machines: 1
 memory: 4096
 cpus: 2
-

@@ -1,5 +1,13 @@
 ---
-- name: Install and configure all components
+- name: install python
+  hosts: all
+  become: yes
+  become_method: sudo
+  gather_facts: no
+  pre_tasks:
+    - name: 'install python-simplejson'
+      raw: sudo apt-get -y install python-simplejson
+- name: install and configure all components
   hosts: all
   become: yes
   become_method: sudo

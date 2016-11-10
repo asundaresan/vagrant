@@ -8,9 +8,10 @@ vagrant_root = File.dirname(__FILE__)
 config = YAML.load_file("#{vagrant_root}/vagrant_configuration.yaml")
 config_memory = config["memory"]
 config_cpus = config["cpus"]
+config_box = config["box"]
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "ubuntu/trusty64"
+  config.vm.box = config_box
   config.vm.provider "virtualbox" do |v|
     v.memory = config_memory
     v.cpus = config_cpus
@@ -29,7 +30,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end 
 
   hostname = "quirm"
-  config.vm.define "machine#{machine_id}" do |machine|
+  config.vm.define "machine1" do |machine|
     # Only execute the ansible provisioner, when all machines are up and ready.
     config.vm.provision :ansible do |ansible|
       ansible.limit = "all"
