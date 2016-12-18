@@ -1,0 +1,6 @@
+box: "bento/ubuntu-16.04"
+#box: "ubuntu/xenial64"
+memory: 4096
+cpus: 2
+hostname: xenial
+name: ubuntu_16_04

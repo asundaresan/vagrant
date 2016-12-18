@@ -5,9 +5,8 @@ require 'yaml'
 
 VAGRANTFILE_API_VERSION = "2"
 vagrant_root = File.dirname(__FILE__)
-<<<<<<< HEAD
 # read configuration from file
-conf = YAML.load_file("#{vagrant_root}/vagrant_configuration.yaml")
+conf = YAML.load_file("#{vagrant_root}/config.yaml")
 conf_memory = conf["memory"]
 conf_cpus = conf["cpus"]
 conf_hostname = conf["hostname"]
@@ -21,6 +20,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     v.memory = conf_memory
     v.cpus = conf_cpus
     v.name = conf_name
+    # add this to fix bug for 16.04
+    v.customize ["modifyvm", :id, "--cableconnected1", "on"]
   end
   # link to projects folder
   if File.directory?(File.expand_path("~/projects")) 

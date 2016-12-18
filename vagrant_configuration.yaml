@@ -1,5 +1,0 @@
-box: "ubuntu/trusty64"
-memory: 4096
-cpus: 2
-hostname: quirm
-name: ubuntu_14_04
